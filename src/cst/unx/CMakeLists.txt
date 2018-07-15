@@ -5,6 +5,10 @@ find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 add_library(cst_unx
+            file.cpp
+            file_descriptor.cpp
+            os/fcntl.cpp
+            os/stat.cpp
             os/unistd.cpp
 )
 
