@@ -7,3 +7,4 @@ endmacro()
 
 _add_test(file_test)
 _add_test(file_descriptor_test)
+_add_test(mutex_test)

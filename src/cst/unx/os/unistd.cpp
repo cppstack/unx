@@ -4,6 +4,22 @@
 namespace cst {
 namespace unx {
 
+int Truncate(const char* path, off_t len, std::error_code* ec) noexcept
+{
+    int r = ::truncate(path, len);
+    if (r == -1 && ec)
+        *ec = Make_os_error_code(errno);
+    return r;
+}
+
+int Truncate(const char* path, off_t len)
+{
+    int r = ::truncate(path, len);
+    if (r == -1)
+        Throw_os_error(errno, "::truncate()");
+    return r;
+}
+
 int Ftruncate(int fd, off_t len, std::error_code* ec) noexcept
 {
     int r = ::ftruncate(fd, len);
@@ -144,6 +160,70 @@ int Close(int fd)
     if (r == -1)
         Throw_os_error(errno, "::close()");
     return r;
+}
+
+int Dup(int oldfd, std::error_code* ec) noexcept
+{
+    int newfd = ::dup(oldfd);
+    if (newfd == -1 && ec)
+        *ec = Make_os_error_code(errno);
+    return newfd;
+}
+
+int Dup(int oldfd)
+{
+    int newfd = ::dup(oldfd);
+    if (newfd == -1)
+        Throw_os_error(errno, "::dup()");
+    return newfd;
+}
+
+int Dup2(int oldfd, int newfd, std::error_code* ec) noexcept
+{
+    int fd = ::dup2(oldfd, newfd);
+    if (fd == -1 && ec)
+        *ec = Make_os_error_code(errno);
+    return fd;
+}
+
+int Dup2(int oldfd, int newfd)
+{
+    int fd = ::dup2(oldfd, newfd);
+    if (fd == -1)
+        Throw_os_error(errno, "::dup2()");
+    return fd;
+}
+
+int Dup3(int oldfd, int newfd, int flags, std::error_code* ec) noexcept
+{
+    int fd = ::dup3(oldfd, newfd, flags);
+    if (fd == -1 && ec)
+        *ec = Make_os_error_code(errno);
+    return fd;
+}
+
+int Dup3(int oldfd, int newfd, int flags)
+{
+    int fd = ::dup3(oldfd, newfd, flags);
+    if (fd == -1)
+        Throw_os_error(errno, "::dup3()");
+    return fd;
+}
+
+pid_t Fork(std::error_code* ec) noexcept
+{
+    pid_t pid = ::fork();
+    if (pid == -1 && ec)
+        *ec = Make_os_error_code(errno);
+    return pid;
+}
+
+pid_t Fork()
+{
+    pid_t pid = ::fork();
+    if (pid == -1)
+        Throw_os_error(errno, "::fork()");
+    return pid;
 }
 
 }

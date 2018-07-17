@@ -7,9 +7,12 @@ find_package(OpenSSL REQUIRED)
 add_library(cst_unx
             file.cpp
             file_descriptor.cpp
+            mutex.cpp
             os/fcntl.cpp
+            os/pthread.cpp
             os/stat.cpp
             os/unistd.cpp
+            os/wait.cpp
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
