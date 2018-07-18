@@ -7,11 +7,8 @@
 namespace cst {
 namespace unx {
 
-int Stat(const char* path, struct stat* st, std::error_code* ec) noexcept;
-int Stat(const char* path, struct stat* st);
-
-int Fstat(int fd, struct stat* st, std::error_code* ec) noexcept;
-int Fstat(int fd, struct stat* st);
+int Stat(const char* path, struct stat* st, std::error_code* ec = nullptr);
+int Fstat(int fd, struct stat* st, std::error_code* ec = nullptr);
 
 }
 }

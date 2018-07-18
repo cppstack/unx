@@ -4,19 +4,20 @@
 namespace cst {
 namespace unx {
 
-int Open(const char* path, int flags, mode_t mode, std::error_code* ec) noexcept
+int Open(const char* path, int flags, std::error_code* ec)
 {
-    int fd = ::open(path, flags, mode);
-    if (fd == -1 && ec)
-        *ec = Make_os_error_code(errno);
-    return fd;
+    return Open(path, flags, 0644, ec);
 }
 
-int Open(const char* path, int flags, mode_t mode)
+int Open(const char* path, int flags, mode_t mode, std::error_code* ec)
 {
     int fd = ::open(path, flags, mode);
-    if (fd == -1)
-        Throw_os_error(errno, "::open()");
+    if (fd == -1) {
+        if (ec)
+            *ec = Make_os_error_code(errno);
+        else
+            Throw_os_error(errno, "::open()");
+    }
     return fd;
 }
 

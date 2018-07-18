@@ -8,6 +8,7 @@ add_library(cst_unx
             file.cpp
             file_descriptor.cpp
             mutex.cpp
+            thread.cpp
             os/fcntl.cpp
             os/pthread.cpp
             os/stat.cpp

@@ -7,8 +7,8 @@
 namespace cst {
 namespace unx {
 
-int Open(const char* path, int flags, mode_t mode, std::error_code* ec) noexcept;
-int Open(const char* path, int flags, mode_t mode = 0644);
+int Open(const char* path, int flags, std::error_code* ec = nullptr);
+int Open(const char* path, int flags, mode_t mode, std::error_code* ec = nullptr);
 
 }
 }
