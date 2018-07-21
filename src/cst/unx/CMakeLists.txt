@@ -10,7 +10,10 @@ add_library(cst_unx
             mutex.cpp
             thread.cpp
             os/fcntl.cpp
+            os/inet.cpp
             os/pthread.cpp
+            os/signal.cpp
+            os/socket.cpp
             os/stat.cpp
             os/unistd.cpp
             os/wait.cpp
