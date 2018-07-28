@@ -4,7 +4,7 @@
 namespace cst {
 namespace unx {
 
-ssize_t Readv(int fd, const struct iovec* iov, int iovcnt, std::error_code* ec)
+ssize_t Readv(int fd, const iovec* iov, int iovcnt, std::error_code* ec)
 {
     ssize_t n = ::readv(fd, iov, iovcnt);
     if (n == -1) {
@@ -16,7 +16,7 @@ ssize_t Readv(int fd, const struct iovec* iov, int iovcnt, std::error_code* ec)
     return n;
 }
 
-ssize_t Writev(int fd, const struct iovec* iov, int iovcnt, std::error_code* ec)
+ssize_t Writev(int fd, const iovec* iov, int iovcnt, std::error_code* ec)
 {
     ssize_t n = ::writev(fd, iov, iovcnt);
     if (n == -1) {

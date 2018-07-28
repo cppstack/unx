@@ -29,9 +29,8 @@ const char* Inet_ntop(int af, const void* src, char* dst, socklen_t size, std::e
     return p;
 }
 
-int Getaddrinfo(const char* node, const char* service,
-                const struct addrinfo* hints, struct addrinfo** res,
-                std::error_code* ec)
+int Getaddrinfo(const char* node, const char* service, const addrinfo* hints,
+                addrinfo** res, std::error_code* ec)
 {
     int rc = ::getaddrinfo(node, service, hints, res);
     if (rc != 0) {

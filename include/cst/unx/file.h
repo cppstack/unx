@@ -67,7 +67,7 @@ public:
 
     size_t size() const
     {
-        struct stat st;
+        stat st;
         Fstat(fd_, &st);
         return st.st_size;
     }

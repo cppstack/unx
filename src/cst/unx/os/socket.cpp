@@ -16,7 +16,7 @@ int Socket(int domain, int type, int protocol, std::error_code* ec)
     return fd;
 }
 
-int Connect(int sockfd, const struct sockaddr* addr, socklen_t addrlen, std::error_code* ec)
+int Connect(int sockfd, const sockaddr* addr, socklen_t addrlen, std::error_code* ec)
 {
     int rc = ::connect(sockfd, addr, addrlen);
     if (rc == -1) {
@@ -28,7 +28,7 @@ int Connect(int sockfd, const struct sockaddr* addr, socklen_t addrlen, std::err
     return rc;
 }
 
-int Bind(int sockfd, const struct sockaddr* addr, socklen_t addrlen, std::error_code* ec)
+int Bind(int sockfd, const sockaddr* addr, socklen_t addrlen, std::error_code* ec)
 {
     int rc = ::bind(sockfd, addr, addrlen);
     if (rc == -1) {
@@ -52,7 +52,7 @@ int Listen(int sockfd, int backlog, std::error_code* ec)
     return rc;
 }
 
-int Accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen, std::error_code* ec)
+int Accept(int sockfd, sockaddr* addr, socklen_t* addrlen, std::error_code* ec)
 {
     int connfd = ::accept(sockfd, addr, addrlen);
     if (connfd == -1) {
@@ -64,7 +64,7 @@ int Accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen, std::error_cod
     return connfd;
 }
 
-int Accept4(int sockfd, struct sockaddr* addr, socklen_t* addrlen, int flags, std::error_code* ec)
+int Accept4(int sockfd, sockaddr* addr, socklen_t* addrlen, int flags, std::error_code* ec)
 {
     int connfd = ::accept4(sockfd, addr, addrlen, flags);
     if (connfd == -1) {
