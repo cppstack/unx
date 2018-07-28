@@ -7,14 +7,18 @@ find_package(OpenSSL REQUIRED)
 add_library(cst_unx
             file.cpp
             file_descriptor.cpp
+            inet_address.cpp
             mutex.cpp
             thread.cpp
             os/fcntl.cpp
             os/inet.cpp
+            os/mman.cpp
             os/pthread.cpp
+            os/sendfile.cpp
             os/signal.cpp
             os/socket.cpp
             os/stat.cpp
+            os/uio.cpp
             os/unistd.cpp
             os/wait.cpp
 )
