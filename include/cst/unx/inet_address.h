@@ -20,11 +20,11 @@ public:
     int family() const noexcept
     { return storage_.ss_family; }
 
-    const struct sockaddr* addr() const noexcept
-    { return (struct sockaddr*) &storage_; }
+    const sockaddr* addr() const noexcept
+    { return (sockaddr*) &storage_; }
 
-    struct sockaddr* addr() noexcept
-    { return (struct sockaddr*) &storage_; }
+    sockaddr* addr() noexcept
+    { return (sockaddr*) &storage_; }
 
     const struct sockaddr_in* addr_v4() const noexcept
     { return (struct sockaddr_in*) &storage_; }

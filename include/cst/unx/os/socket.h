@@ -7,6 +7,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 using socklen_t = ::socklen_t;
 using sockaddr = struct sockaddr;
@@ -31,6 +32,9 @@ ssize_t Sendn(int sockfd, const void* buf, size_t len, int flags, std::error_cod
 int Getsockopt(int sockfd, int level, int opt, void* val, socklen_t* len, std::error_code* ec = nullptr);
 int Setsockopt(int sockfd, int level, int opt, const void* val, socklen_t len, std::error_code* ec = nullptr);
 
+int Shutdown(int sockfd, int how, std::error_code* ec = nullptr);
+
+}
 }
 }
 

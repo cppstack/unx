@@ -9,6 +9,7 @@ add_library(cst_unx
             file_descriptor.cpp
             inet_address.cpp
             mutex.cpp
+            socket.cpp
             thread.cpp
             os/fcntl.cpp
             os/inet.cpp

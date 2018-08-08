@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Socket(int domain, int type, int protocol, std::error_code* ec)
 {
@@ -174,5 +175,18 @@ int Setsockopt(int sockfd, int level, int opt, const void* val, socklen_t len, s
     return rc;
 }
 
+int Shutdown(int sockfd, int how, std::error_code* ec)
+{
+    int rc = ::shutdown(sockfd, how);
+    if (rc == -1) {
+        if (ec)
+            *ec = Make_os_error_code(errno);
+        else
+            Throw_os_error(errno, "::shutdown()");
+    }
+    return rc;
+}
+
+}
 }
 }
