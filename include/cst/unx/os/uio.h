@@ -7,12 +7,14 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 using iovec = struct iovec;
 
 ssize_t Readv(int fd, const iovec* iov, int iovcnt, std::error_code* ec = nullptr);
 ssize_t Writev(int fd, const iovec* iov, int iovcnt, std::error_code* ec = nullptr);
 
+}
 }
 }
 

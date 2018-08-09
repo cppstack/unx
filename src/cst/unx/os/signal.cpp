@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 sighandler_t Signal(int signum, sighandler_t handler, std::error_code* ec)
 {
@@ -190,5 +191,6 @@ int Sigsuspend(const sigset_t* mask, std::error_code* ec)
     return -1;
 }
 
+}
 }
 }

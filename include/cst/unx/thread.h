@@ -28,13 +28,13 @@ public:
 
     void join()
     {
-        Pthread_join(tid_, nullptr);
+        os::Pthread_join(tid_, nullptr);
         tid_ = 0;
     }
 
     void detach()
     {
-        Pthread_detach(tid_);
+        os::Pthread_detach(tid_);
         tid_ = 0;
     }
 
@@ -52,7 +52,7 @@ private:
         argv_ = std::exchange(that.argv_, nullptr);
     }
 
-    pthread_t tid_ = 0;
+    os::pthread_t tid_ = 0;
     function_t func_;
     void* argv_ = nullptr;
 };

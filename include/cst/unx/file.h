@@ -21,7 +21,7 @@ public:
     File(const std::string& path, int flags, mode_t mode = 0644)
         : path_(path)
     {
-        fd_.reset(Open(path.c_str(), flags, mode));
+        fd_.reset(os::Open(path.c_str(), flags, mode));
     }
 
     File(const File&) = delete;
@@ -42,33 +42,33 @@ public:
 
     int truncate(off_t len)
     {
-        return Ftruncate(fd_, len);
+        return os::Ftruncate(fd_, len);
     }
 
     off_t seek(off_t off, int whence)
     {
-        return Lseek(fd_, off, whence);
+        return os::Lseek(fd_, off, whence);
     }
 
     ssize_t read(void* buf, size_t len)
     {
-        return Read(fd_, buf, len);
+        return os::Read(fd_, buf, len);
     }
 
     ssize_t write(const void* buf, size_t len)
     {
-        return Write(fd_, buf, len);
+        return os::Write(fd_, buf, len);
     }
 
     ssize_t writes(const char* str)
     {
-        return write(str, std::strlen(str));
+        return os::Write(fd_, str, std::strlen(str));
     }
 
     size_t size() const
     {
-        stat st;
-        Fstat(fd_, &st);
+        os::stat st;
+        os::Fstat(fd_, &st);
         return st.st_size;
     }
 

@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Pthread_create(pthread_t* thread, const pthread_attr_t* attr, void* (*start)(void*), void* arg, std::error_code* ec)
 {
@@ -101,5 +102,6 @@ int Pthread_mutex_destroy(pthread_mutex_t* mutex, std::error_code* ec)
     return err;
 }
 
+}
 }
 }

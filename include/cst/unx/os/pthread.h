@@ -6,6 +6,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 using pthread_t = ::pthread_t;
 using pthread_attr_t = ::pthread_attr_t;
@@ -27,6 +28,7 @@ int Pthread_mutex_unlock(pthread_mutex_t* mutex, std::error_code* ec = nullptr);
 
 int Pthread_mutex_destroy(pthread_mutex_t* mutex, std::error_code* ec = nullptr);
 
+}
 }
 }
 

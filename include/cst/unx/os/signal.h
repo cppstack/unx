@@ -7,6 +7,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 using sighandler_t = ::sighandler_t;
 using sigset_t = ::sigset_t;
@@ -32,6 +33,7 @@ int Sigpending(sigset_t* set, std::error_code* ec = nullptr);
 
 int Sigsuspend(const sigset_t* mask, std::error_code* ec = nullptr);
 
+}
 }
 }
 

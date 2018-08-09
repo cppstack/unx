@@ -7,11 +7,13 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 pid_t Wait(int* wstatus, std::error_code* ec = nullptr);
 
 pid_t Waitpid(pid_t pid, int* wstatus, int options, std::error_code* ec = nullptr);
 
+}
 }
 }
 

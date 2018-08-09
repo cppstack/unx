@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Stat(const char* path, stat* st, std::error_code* ec)
 {
@@ -28,5 +29,6 @@ int Fstat(int fd, stat* st, std::error_code* ec)
     return r;
 }
 
+}
 }
 }

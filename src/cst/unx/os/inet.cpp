@@ -4,6 +4,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Inet_pton(int af, const char* src, void* dst, std::error_code* ec)
 {
@@ -42,5 +43,6 @@ int Getaddrinfo(const char* node, const char* service, const addrinfo* hints,
     return rc;
 }
 
+}
 }
 }

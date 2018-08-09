@@ -28,7 +28,7 @@ void FileDescriptor::reset(int fd, bool cldt)
 
 void FileDescriptor::close()
 {
-    Close(fd_);
+    os::Close(fd_);
     cldt_ = false;
 }
 

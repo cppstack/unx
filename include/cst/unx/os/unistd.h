@@ -7,6 +7,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Truncate(const char* path, off_t len, std::error_code* ec = nullptr);
 int Ftruncate(int fd, off_t len, std::error_code* ec = nullptr);
@@ -27,6 +28,7 @@ int Dup3(int oldfd, int newfd, int flags, std::error_code* ec = nullptr);
 
 pid_t Fork(std::error_code* ec = nullptr);
 
+}
 }
 }
 

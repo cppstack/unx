@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Open(const char* path, int flags, std::error_code* ec)
 {
@@ -21,5 +22,6 @@ int Open(const char* path, int flags, mode_t mode, std::error_code* ec)
     return fd;
 }
 
+}
 }
 }

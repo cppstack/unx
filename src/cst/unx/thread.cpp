@@ -7,7 +7,7 @@ namespace unx {
 Thread::Thread(const function_t& func, void* argv)
     : func_(func), argv_(argv)
 {
-    Pthread_create(&tid_, nullptr, *func_.target<void*(*)(void*)>(), argv_);
+    os::Pthread_create(&tid_, nullptr, *func_.target<void*(*)(void*)>(), argv_);
 }
 
 Thread& Thread::operator=(Thread&& that) noexcept

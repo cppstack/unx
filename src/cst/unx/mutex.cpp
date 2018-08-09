@@ -7,12 +7,12 @@ namespace unx {
 Mutex::Mutex()
     : holder_(0)
 {
-    Pthread_mutex_init(&mtx_, nullptr);
+    os::Pthread_mutex_init(&mtx_, nullptr);
 }
 
 void Mutex::lock()
 {
-    Pthread_mutex_lock(&mtx_);
+    os::Pthread_mutex_lock(&mtx_);
     holder_ = ::pthread_self();
 }
 
@@ -20,7 +20,7 @@ bool Mutex::trylock()
 {
     std::error_code ec;
 
-    if (Pthread_mutex_trylock(&mtx_, &ec) != 0) {
+    if (os::Pthread_mutex_trylock(&mtx_, &ec) != 0) {
         if (ec.value() == EBUSY)
             return false;
 
@@ -37,7 +37,7 @@ void Mutex::unlock()
 
     if (::pthread_equal(holder_, ::pthread_self())) {
         holder_ = 0;  /* only release holder_ while still holding it */
-        if (Pthread_mutex_unlock(&mtx_, &ec))
+        if (os::Pthread_mutex_unlock(&mtx_, &ec))
             holder_ = ::pthread_self(); /* restore holder, unlock() failed */
     } else
         ec = Make_os_error_code(EPERM);

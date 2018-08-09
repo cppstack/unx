@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 int Truncate(const char* path, off_t len, std::error_code* ec)
 {
@@ -174,5 +175,6 @@ pid_t Fork(std::error_code* ec)
     return pid;
 }
 
+}
 }
 }

@@ -7,6 +7,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 void* Mmap(void* addr, size_t len, int prot, int flags,
            int fd, off_t offset, std::error_code* ec = nullptr);
@@ -24,6 +25,7 @@ int Madvise(void* addr, size_t len, int advice, std::error_code* ec = nullptr);
 
 int Munmap(void* addr, size_t len, std::error_code* ec = nullptr);
 
+}
 }
 }
 

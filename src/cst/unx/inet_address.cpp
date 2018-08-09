@@ -9,7 +9,7 @@ InetAddress::InetAddress(const std::string& ip, uint16_t port)
     : InetAddress()
 {
     for (int af : { AF_INET, AF_INET6 }) {
-        if (Inet_pton(af, ip.c_str(), sin_addr_(af)) == 1) {
+        if (os::Inet_pton(af, ip.c_str(), sin_addr_(af)) == 1) {
             sin_port_(af) = htons(port);
             storage_.ss_family = af;
             len_ = (af == AF_INET) ? sizeof(sockaddr_in) : sizeof(sockaddr_in6);
@@ -23,7 +23,7 @@ InetAddress::InetAddress(const std::string& ip, uint16_t port)
 InetAddress::InetAddress(const std::string& ip, uint16_t port, int af)
     : InetAddress()
 {
-    if (Inet_pton(af, ip.c_str(), sin_addr_(af)) != 1)
+    if (os::Inet_pton(af, ip.c_str(), sin_addr_(af)) != 1)
         throw InetAddressError(ip, af);
 
     sin_port_(af) = htons(port);

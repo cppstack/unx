@@ -152,7 +152,7 @@ Socket::addrinfo_uptr Socket::getaddrinfo(const std::string& host,
     if (*node == '\0')
         node = nullptr;
 
-    Getaddrinfo(node, serv.c_str(), &hints, &res);
+    os::Getaddrinfo(node, serv.c_str(), &hints, &res);
 
     return addrinfo_uptr(res, ::freeaddrinfo);
 }

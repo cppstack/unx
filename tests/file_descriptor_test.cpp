@@ -14,7 +14,7 @@ TEST_CASE("FileDescriptor", "[FileDescriptor]")
 
     {
         unx::FileDescriptor fd1;
-        unx::FileDescriptor fd2(unx::Open(path, O_RDWR|O_CREAT));
+        unx::FileDescriptor fd2(unx::os::Open(path, O_RDWR|O_CREAT));
         REQUIRE(fd2 != -1);
 
         fd1 = std::move(fd2);

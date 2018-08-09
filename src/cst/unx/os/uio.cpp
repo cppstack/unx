@@ -3,6 +3,7 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 ssize_t Readv(int fd, const iovec* iov, int iovcnt, std::error_code* ec)
 {
@@ -28,5 +29,6 @@ ssize_t Writev(int fd, const iovec* iov, int iovcnt, std::error_code* ec)
     return n;
 }
 
+}
 }
 }

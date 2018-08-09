@@ -6,12 +6,14 @@
 
 namespace cst {
 namespace unx {
+namespace os {
 
 using stat = struct stat;
 
 int Stat(const char* path, stat* st, std::error_code* ec = nullptr);
 int Fstat(int fd, stat* st, std::error_code* ec = nullptr);
 
+}
 }
 }
 

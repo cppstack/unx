@@ -45,8 +45,8 @@ void test_no_signal_handler()
 
 void test_signal()
 {
-    unx::Signal(SIGINT,  sig_handler);
-    unx::Signal(SIGALRM, sig_handler);
+    unx::os::Signal(SIGINT,  sig_handler);
+    unx::os::Signal(SIGALRM, sig_handler);
 
     ::alarm(10);
 
@@ -68,8 +68,8 @@ void test_signal()
 
 void test_signal_()
 {
-    unx::Signal_(SIGINT,  sig_handler);
-    unx::Signal_(SIGALRM, sig_handler);
+    unx::os::Signal_(SIGINT,  sig_handler);
+    unx::os::Signal_(SIGALRM, sig_handler);
 
     ::alarm(10);
 
@@ -91,8 +91,8 @@ void test_signal_()
 
 void test_signal_intr()
 {
-    unx::Signal_intr(SIGINT,  sig_handler);
-    unx::Signal_intr(SIGALRM, sig_handler);
+    unx::os::Signal_intr(SIGINT,  sig_handler);
+    unx::os::Signal_intr(SIGALRM, sig_handler);
 
     ::alarm(10);
 
