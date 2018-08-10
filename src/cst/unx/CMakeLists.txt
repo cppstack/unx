@@ -11,9 +11,11 @@ add_library(cst_unx
             mutex.cpp
             socket.cpp
             thread.cpp
+            error/ssl_error.cpp
             os/fcntl.cpp
             os/inet.cpp
             os/mman.cpp
+            os/openssl.cpp
             os/pthread.cpp
             os/sendfile.cpp
             os/signal.cpp
