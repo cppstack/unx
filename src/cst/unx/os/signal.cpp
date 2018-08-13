@@ -5,9 +5,9 @@ namespace cst {
 namespace unx {
 namespace os {
 
-sighandler_t Signal(int signum, sighandler_t handler, std::error_code* ec)
+::sighandler_t Signal(int signum, ::sighandler_t handler, std::error_code* ec)
 {
-    sighandler_t orig = ::signal(signum, handler);
+    ::sighandler_t orig = ::signal(signum, handler);
     if (orig == SIG_ERR) {
         if (ec)
             *ec = Make_os_error_code(errno);
@@ -17,9 +17,9 @@ sighandler_t Signal(int signum, sighandler_t handler, std::error_code* ec)
     return orig;
 }
 
-sighandler_t Signal_(int signum, sighandler_t handler, std::error_code* ec)
+::sighandler_t Signal_(int signum, ::sighandler_t handler, std::error_code* ec)
 {
-    sigaction act, oact;
+    struct sigaction act, oact;
 
     act.sa_handler = handler;
     act.sa_flags = 0;
@@ -42,9 +42,9 @@ sighandler_t Signal_(int signum, sighandler_t handler, std::error_code* ec)
     return oact.sa_handler;
 }
 
-sighandler_t Signal_intr(int signum, sighandler_t handler, std::error_code* ec)
+::sighandler_t Signal_intr(int signum, ::sighandler_t handler, std::error_code* ec)
 {
-    sigaction act, oact;
+    struct sigaction act, oact;
 
     act.sa_handler = handler;
     act.sa_flags = 0;
@@ -61,7 +61,7 @@ sighandler_t Signal_intr(int signum, sighandler_t handler, std::error_code* ec)
     return oact.sa_handler;
 }
 
-int Sigaction(int signum, const sigaction* act, sigaction* oldact, std::error_code* ec)
+int Sigaction(int signum, const struct sigaction* act, struct sigaction* oldact, std::error_code* ec)
 {
     int ret = ::sigaction(signum, act, oldact);
     if (ret == -1) {

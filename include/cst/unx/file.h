@@ -67,7 +67,7 @@ public:
 
     size_t size() const
     {
-        os::stat st;
+        struct stat st;
         os::Fstat(fd_, &st);
         return st.st_size;
     }

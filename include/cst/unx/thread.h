@@ -52,7 +52,7 @@ private:
         argv_ = std::exchange(that.argv_, nullptr);
     }
 
-    os::pthread_t tid_ = 0;
+    ::pthread_t tid_ = 0;
     function_t func_;
     void* argv_ = nullptr;
 };

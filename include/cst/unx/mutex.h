@@ -20,8 +20,8 @@ public:
     ~Mutex();
 
 private:
-    os::pthread_mutex_t mtx_;
-    os::pthread_t holder_;
+    ::pthread_mutex_t mtx_;
+    ::pthread_t holder_;
 };
 
 }

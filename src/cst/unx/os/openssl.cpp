@@ -5,15 +5,6 @@ namespace cst {
 namespace unx {
 namespace os {
 
-void SSL_Cleanups() noexcept
-{
-    ::ERR_free_strings();
-    ::ERR_remove_thread_state(NULL);
-    ::CRYPTO_cleanup_all_ex_data();
-    ::SSL_COMP_free_compression_methods();
-    ::EVP_cleanup();
-}
-
 int SSL_Connect(SSL* ssl, std::error_code* ec)
 {
     int rc = ::SSL_connect(ssl);

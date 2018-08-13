@@ -9,9 +9,6 @@ namespace cst {
 namespace unx {
 namespace os {
 
-using socklen_t = ::socklen_t;
-using addrinfo = struct addrinfo;
-
 int Inet_pton(int af, const char* src, void* dst, std::error_code* ec = nullptr);
 const char* Inet_ntop(int af, const void* src, char* dst, socklen_t size, std::error_code* ec = nullptr);
 

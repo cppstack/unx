@@ -9,12 +9,6 @@ namespace cst {
 namespace unx {
 namespace os {
 
-using SSL_CTX = ::SSL_CTX;
-using SSL = ::SSL;
-using X509 = ::X509;
-
-void SSL_Cleanups() noexcept;
-
 int SSL_Connect(SSL* ssl, std::error_code* ec = nullptr);
 
 int SSL_Peek(SSL* ssl, void* buf, int num, std::error_code* ec = nullptr);

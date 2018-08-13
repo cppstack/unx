@@ -3,7 +3,6 @@
 
 #include <unistd.h>
 #include <system_error>
-#include <cst/unx/os/types.h>
 
 namespace cst {
 namespace unx {

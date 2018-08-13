@@ -3,14 +3,10 @@
 
 #include <sys/socket.h>
 #include <system_error>
-#include <cst/unx/os/types.h>
 
 namespace cst {
 namespace unx {
 namespace os {
-
-using socklen_t = ::socklen_t;
-using sockaddr = struct sockaddr;
 
 int Socket(int domain, int type, int protocol, std::error_code* ec = nullptr);
 

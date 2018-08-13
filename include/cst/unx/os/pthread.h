@@ -8,11 +8,6 @@ namespace cst {
 namespace unx {
 namespace os {
 
-using pthread_t = ::pthread_t;
-using pthread_attr_t = ::pthread_attr_t;
-using pthread_mutex_t = ::pthread_mutex_t;
-using pthread_mutexattr_t = ::pthread_mutexattr_t;
-
 int Pthread_create(pthread_t* thread, const pthread_attr_t* attr, void* (*start)(void*), void* arg, std::error_code* ec = nullptr);
 
 int Pthread_join(pthread_t thread, void** retval, std::error_code* ec = nullptr);

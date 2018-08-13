@@ -5,7 +5,7 @@ namespace cst {
 namespace unx {
 namespace os {
 
-int Stat(const char* path, stat* st, std::error_code* ec)
+int Stat(const char* path, struct stat* st, std::error_code* ec)
 {
     int r = ::stat(path, st);
     if (r == -1) {
@@ -17,7 +17,7 @@ int Stat(const char* path, stat* st, std::error_code* ec)
     return r;
 }
 
-int Fstat(int fd, stat* st, std::error_code* ec)
+int Fstat(int fd, struct stat* st, std::error_code* ec)
 {
     int r = ::fstat(fd, st);
     if (r == -1) {

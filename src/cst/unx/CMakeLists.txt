@@ -10,6 +10,8 @@ add_library(cst_unx
             inet_address.cpp
             mutex.cpp
             socket.cpp
+            ssl.cpp
+            sslctx.cpp
             thread.cpp
             error/ssl_error.cpp
             os/fcntl.cpp
