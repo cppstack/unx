@@ -10,6 +10,7 @@ add_library(cst_unx
             inet_address.cpp
             mutex.cpp
             socket.cpp
+            sslsocket.cpp
             ssl.cpp
             sslctx.cpp
             thread.cpp

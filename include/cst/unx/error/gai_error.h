@@ -16,7 +16,7 @@ public:
     { return ::gai_strerror(ev); }
 };
 
-const std::error_category& gai_category() noexcept
+inline const std::error_category& gai_category() noexcept
 {
     static the_gai_category instance;
     return instance;

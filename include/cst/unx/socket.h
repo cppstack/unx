@@ -2,6 +2,7 @@
 #define _CST_UNX_SOCKET_H
 
 #include <memory>
+#include <cst/unx/os/unistd.h>
 #include <cst/unx/os/socket.h>
 #include <cst/unx/inet_address.h>
 #include <cst/unx/file_descriptor.h>
@@ -10,6 +11,7 @@ namespace cst {
 namespace unx {
 
 class Socket {
+    friend class SslSocket;
 public:
     Socket(const Socket&) = delete;
     Socket& operator=(const Socket&) = delete;
@@ -76,36 +78,36 @@ public:
 
     int accept(Socket* sock, InetAddress* address = nullptr, int flags = 0);
 
-    ssize_t peek(void* buf, size_t len, int flags = 0)
+    virtual ssize_t peek(void* buf, size_t len)
     {
-        return os::Recv(fd_, buf, len, MSG_PEEK | flags);
+        return os::Recv(fd_, buf, len, MSG_PEEK);
     }
 
-    ssize_t recv(void* buf, size_t len, int flags = 0)
+    virtual ssize_t read(void* buf, size_t len)
     {
-        return os::Recv(fd_, buf, len, flags);
+        return os::Read(fd_, buf, len);
     }
 
-    ssize_t recvn(void* buf, size_t len, int flags = 0)
+    virtual ssize_t readn(void* buf, size_t len)
     {
-        return os::Recvn(fd_, buf, len, flags);
+        return os::Readn(fd_, buf, len);
     }
 
-    ssize_t recv_until(void* buf, size_t len, char delim, int flags = 0);
+    ssize_t read_until(void* buf, size_t len, char delim);
 
-    ssize_t send(const void* buf, size_t len, int flags = 0)
+    virtual ssize_t write(const void* buf, size_t len)
     {
-        return os::Send(fd_, buf, len, flags);
+        return os::Write(fd_, buf, len);
     }
 
-    ssize_t sendn(const void* buf, size_t len, int flags = 0)
+    virtual ssize_t writen(const void* buf, size_t len)
     {
-        return os::Sendn(fd_, buf, len, flags);
+        return os::Writen(fd_, buf, len);
     }
 
-    ssize_t sends(const char* str, int flags = 0)
+    ssize_t writes(const char* str)
     {
-        return os::Sendn(fd_, str, std::strlen(str), flags);
+        return writen(str, std::strlen(str));
     }
 
     int get_opt(int level, int opt, void* val, socklen_t* len) const
@@ -123,7 +125,7 @@ public:
         os::Shutdown(fd_, how);
     }
 
-    void close()
+    virtual void close()
     {
         fd_.close();
     }
@@ -136,6 +138,8 @@ public:
         return err;
     }
 
+    virtual ~Socket() =  default;
+
 private:
     using addrinfo_uptr = std::unique_ptr<addrinfo, decltype(::freeaddrinfo)*>;
 
@@ -143,6 +147,7 @@ private:
                                      const std::string& serv,
                                      const addrinfo& hints);
 
+protected:
     int family_ = 0;
     int type_   = 0;
     int proto_  = 0;

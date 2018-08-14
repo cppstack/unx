@@ -27,7 +27,7 @@ public:
     std::string message(int ev) const override;
 };
 
-const std::error_category& ssl_category() noexcept
+inline const std::error_category& ssl_category() noexcept
 {
     static the_ssl_category instance;
     return instance;

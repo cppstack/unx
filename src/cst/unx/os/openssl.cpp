@@ -104,9 +104,7 @@ int SSL_Writen(SSL* ssl, const void* buf, int num, std::error_code* ec)
 int SSL_Shutdown(SSL* ssl, std::error_code* ec)
 {
     int rc = ::SSL_shutdown(ssl);
-    if (rc == 0)  /* try again */
-        rc = ::SSL_shutdown(ssl);
-    if (rc <= 0) {
+    if (rc < 0) {
         int ev = ::SSL_get_error(ssl, rc);
         if (ec)
             *ec = Make_ssl_error_code(ev);

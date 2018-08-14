@@ -129,9 +129,9 @@ int Socket::accept(Socket* sock, InetAddress* address, int flags)
     return connfd;
 }
 
-ssize_t Socket::recv_until(void* buf, size_t len, char delim, int flags)
+ssize_t Socket::read_until(void* buf, size_t len, char delim)
 {
-    ssize_t n = peek(buf, len, flags);
+    ssize_t n = peek(buf, len);
     if (n <= 0)
         return n;
 
@@ -139,7 +139,7 @@ ssize_t Socket::recv_until(void* buf, size_t len, char delim, int flags)
     if (m != nullptr)
         n = m - (char*) buf + 1;
 
-    return recv(buf, n, flags);
+    return read(buf, n);
 }
 
 Socket::addrinfo_uptr Socket::getaddrinfo(const std::string& host,
