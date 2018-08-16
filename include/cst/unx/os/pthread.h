@@ -14,6 +14,9 @@ int Pthread_join(pthread_t thread, void** retval, std::error_code* ec = nullptr)
 
 int Pthread_detach(pthread_t thread, std::error_code* ec = nullptr);
 
+int Pthread_cancel(pthread_t thread, std::error_code* ec = nullptr);
+int Pthread_setcancelstate(int state, int* oldstate, std::error_code* ec = nullptr);
+int Pthread_setcanceltype(int type, int* oldtype, std::error_code* ec = nullptr);
 
 int Pthread_mutex_init(pthread_mutex_t* mutex, const pthread_mutexattr_t* attr, std::error_code* ec = nullptr);
 

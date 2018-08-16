@@ -41,6 +41,42 @@ int Pthread_detach(pthread_t thread, std::error_code* ec)
     return err;
 }
 
+int Pthread_cancel(pthread_t thread, std::error_code* ec)
+{
+    int err = ::pthread_cancel(thread);
+    if (err) {
+        if (ec)
+            *ec = Make_os_error_code(err);
+        else
+            Throw_os_error(err, "::pthread_cancel()");
+    }
+    return err;
+}
+
+int Pthread_setcancelstate(int state, int* oldstate, std::error_code* ec)
+{
+    int err = ::pthread_setcancelstate(state, oldstate);
+    if (err) {
+        if (ec)
+            *ec = Make_os_error_code(err);
+        else
+            Throw_os_error(err, "::pthread_setcancelstate()");
+    }
+    return err;
+}
+
+int Pthread_setcanceltype(int type, int* oldtype, std::error_code* ec)
+{
+    int err = ::pthread_setcanceltype(type, oldtype);
+    if (err) {
+        if (ec)
+            *ec = Make_os_error_code(err);
+        else
+            Throw_os_error(err, "::pthread_setcanceltype()");
+    }
+    return err;
+}
+
 
 int Pthread_mutex_init(pthread_mutex_t* mutex, const pthread_mutexattr_t* attr, std::error_code* ec)
 {

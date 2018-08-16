@@ -4,8 +4,7 @@ find_package(Threads REQUIRED)
 
 find_package(OpenSSL REQUIRED)
 
-add_library(cst_unx
-            file.cpp
+set(SRCS    file.cpp
             file_descriptor.cpp
             inet_address.cpp
             mutex.cpp
@@ -20,14 +19,25 @@ add_library(cst_unx
             os/mman.cpp
             os/openssl.cpp
             os/pthread.cpp
+            os/poll.cpp
             os/sendfile.cpp
             os/signal.cpp
             os/socket.cpp
             os/stat.cpp
+            os/time.cpp
             os/uio.cpp
             os/unistd.cpp
             os/wait.cpp
 )
+
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    list(APPEND SRCS os/epoll.cpp
+                     os/eventfd.cpp
+                     os/signalfd.cpp
+    )
+endif()
+
+add_library(cst_unx ${SRCS})
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
