@@ -12,7 +12,9 @@ class InetAddress {
 
 public:
     InetAddress() noexcept
-    { std::memset(&storage_, 0, sizeof(storage_)); }
+    {
+        std::memset(&storage_, 0, sizeof(storage_));
+    }
 
     InetAddress(const std::string& ip, uint16_t port);
     InetAddress(const std::string& ip, uint16_t port, int af);

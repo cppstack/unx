@@ -24,7 +24,10 @@ public:
     Thread& operator=(const Thread&) = delete;
     Thread& operator=(Thread&& that) noexcept;
 
-    bool joinable() const noexcept { return tid_ != 0; }
+    bool joinable() const noexcept
+    {
+        return tid_ != 0;
+    }
 
     void join()
     {

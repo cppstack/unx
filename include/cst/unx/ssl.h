@@ -20,7 +20,10 @@ public:
     Ssl& operator=(const Ssl&) = delete;
     Ssl& operator=(Ssl&& that);
 
-    operator SSL*() const noexcept { return ssl_.get(); }
+    operator SSL*() const noexcept
+    {
+        return ssl_.get();
+    }
 
     int connect(int fd);
 
