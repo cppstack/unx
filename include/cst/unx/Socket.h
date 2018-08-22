@@ -4,8 +4,8 @@
 #include <memory>
 #include <cst/unx/os/unistd.h>
 #include <cst/unx/os/socket.h>
-#include <cst/unx/inet_address.h>
-#include <cst/unx/file_descriptor.h>
+#include <cst/unx/InetAddress.h>
+#include <cst/unx/FileDescriptor.h>
 
 namespace cst {
 namespace unx {

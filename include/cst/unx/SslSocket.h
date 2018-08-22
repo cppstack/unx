@@ -1,8 +1,8 @@
 #ifndef _CST_UNX_SSLSOCKET_H
 #define _CST_UNX_SSLSOCKET_H
 
-#include <cst/unx/socket.h>
-#include <cst/unx/ssl.h>
+#include <cst/unx/Socket.h>
+#include <cst/unx/Ssl.h>
 
 namespace cst {
 namespace unx {

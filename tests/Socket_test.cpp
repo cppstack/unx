@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include <cst/unx/sslsocket.h>
+#include <cst/unx/SslSocket.h>
 #include <thread>
 #include <chrono>
 #include <atomic>

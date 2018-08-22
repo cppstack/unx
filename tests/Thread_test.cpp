@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include <cst/unx/thread.h>
+#include <cst/unx/Thread.h>
 
 namespace unx = cst::unx;
 

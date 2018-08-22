@@ -1,4 +1,4 @@
-#include <cst/unx/mutex.h>
+#include <cst/unx/Mutex.h>
 #include <cst/unx/error/os_error.h>
 
 namespace cst {

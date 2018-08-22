@@ -17,6 +17,6 @@ before_script:
 
 script:
   - mkdir build && cd build
-  - cmake -DLNX_BUILD_TEST=1 ..
+  - cmake -DUNX_BUILD_TESTS=1 ..
   - make
   - make test

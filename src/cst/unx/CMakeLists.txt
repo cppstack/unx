@@ -4,15 +4,15 @@ find_package(Threads REQUIRED)
 
 find_package(OpenSSL REQUIRED)
 
-set(SRCS    file.cpp
-            file_descriptor.cpp
-            inet_address.cpp
-            mutex.cpp
-            socket.cpp
-            sslsocket.cpp
-            ssl.cpp
-            sslctx.cpp
-            thread.cpp
+set(SRCS    File.cpp
+            FileDescriptor.cpp
+            InetAddress.cpp
+            Mutex.cpp
+            Socket.cpp
+            SslSocket.cpp
+            Ssl.cpp
+            SslCtx.cpp
+            Thread.cpp
             error/ssl_error.cpp
             os/fcntl.cpp
             os/inet.cpp

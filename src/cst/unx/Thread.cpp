@@ -1,4 +1,4 @@
-#include <cst/unx/thread.h>
+#include <cst/unx/Thread.h>
 #include <cst/unx/error/os_error.h>
 
 namespace cst {
