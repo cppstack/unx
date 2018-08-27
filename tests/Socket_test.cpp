@@ -8,43 +8,43 @@
 
 namespace unx = cst::unx;
 
-const uint16_t port = 12345;
+const uint16_t Port_ = 12345;
 
-const char msg[] = "hello";
-const std::size_t msg_size = sizeof(msg);
+const char Msg_[] = "hello";
+const std::size_t Msg_size_ = sizeof(Msg_);
 
-std::atomic_bool ready{false};
+std::atomic_bool Ready_{false};
 
-void client_func()
+void Client_func_()
 {
     using namespace std::chrono_literals;
 
-    while (!ready)
+    while (!Ready_)
         std::this_thread::sleep_for(1ms);
 
     unx::Socket sock(AF_INET, SOCK_STREAM, 0);
-    sock.connect("localhost", port);
+    sock.connect("localhost", Port_);
 
-    sock.write(msg, msg_size);
+    sock.write(Msg_, Msg_size_);
     sock.close();
 }
 
 TEST_CASE("socket", "[Socket]")
 {
-    char buf[msg_size];
+    char buf[Msg_size_];
 
-    std::thread client_thread(client_func);
+    std::thread client_thread(Client_func_);
 
-    unx::Socket serv_sock = unx::Socket::tcp_bind(unx::InetAddress("::", port));
+    unx::Socket serv_sock = unx::Socket::Tcp_bind(unx::InetAddress("::", Port_));
     serv_sock.listen(5);
 
-    ready = true;
+    Ready_ = true;
     unx::Socket peer;
     serv_sock.accept(&peer);
     peer.read(buf, sizeof(buf));
     peer.close();
 
-    REQUIRE(std::strcmp(buf, msg) == 0);
+    REQUIRE(std::strcmp(buf, Msg_) == 0);
 
     client_thread.join();
 }
@@ -54,7 +54,7 @@ TEST_CASE("ssl", "[SslSocket]")
     char msg[] = "GET / HTTP/1.1\r\nHost: github.com\r\n\r\n";
     char buf[1024] = "";
 
-    unx::SslSocket sock(unx::Socket::tcp_connect("github.com", 443));
+    unx::SslSocket sock(unx::Socket::Tcp_connect("github.com", 443));
     REQUIRE(sock.verify_certificate());
     sock.write(msg, sizeof(msg));
     sock.read(buf, sizeof(buf));

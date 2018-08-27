@@ -83,11 +83,11 @@ public:
     { }
 
     InetAddressError(const std::string& ip, int af)
-        : logic_error("invalid ip address " + ip + " for address family " + af_str_(af))
+        : logic_error("invalid ip address " + ip + " for address family " + Af_str_(af))
     { }
 
 private:
-    static std::string af_str_(int af) noexcept
+    static std::string Af_str_(int af) noexcept
     {
         switch (af) {
         case AF_INET:

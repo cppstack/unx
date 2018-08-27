@@ -12,20 +12,23 @@ public:
     SslCtx(const SslCtx&) = delete;
     SslCtx& operator=(const SslCtx&) = delete;
 
-    static SslCtx& get()
+    static SslCtx& Get()
     {
         static SslCtx ctx;
         return ctx;
     }
 
-    static void cleanup() noexcept;
-
     operator ::SSL_CTX*() const noexcept { return ctx_.get(); }
 
-    ~SslCtx() { cleanup(); }
+    ~SslCtx()
+    {
+        Cleanup_();
+    }
 
 private:
     SslCtx();
+
+    static void Cleanup_() noexcept;
 
     std::unique_ptr<::SSL_CTX, void(*)(::SSL_CTX*)> ctx_{nullptr, ::SSL_CTX_free};
 };

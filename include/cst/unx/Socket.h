@@ -30,20 +30,20 @@ public:
     Socket(Socket&&) = default;
     Socket& operator=(Socket&&) = default;
 
-    static Socket tcp_bind(const InetAddress& addr, int flags = 0);
+    static Socket Tcp_bind(const InetAddress& addr, int flags = 0);
 
-    static Socket tcp_bind(const std::string& host, const std::string& serv,
+    static Socket Tcp_bind(const std::string& host, const std::string& serv,
                            int flags = 0);
 
-    static Socket tcp_bind(const std::string& host, uint16_t port,
+    static Socket Tcp_bind(const std::string& host, uint16_t port,
                            int flags = 0);
 
-    static Socket tcp_connect(const InetAddress& addr, int flags = 0);
+    static Socket Tcp_connect(const InetAddress& addr, int flags = 0);
 
-    static Socket tcp_connect(const std::string& host, const std::string& serv,
+    static Socket Tcp_connect(const std::string& host, const std::string& serv,
                               int flags = 0);
 
-    static Socket tcp_connect(const std::string& host, uint16_t port,
+    static Socket Tcp_connect(const std::string& host, uint16_t port,
                               int flags = 0);
 
     int fd() const noexcept
@@ -141,9 +141,9 @@ public:
     virtual ~Socket() =  default;
 
 private:
-    using addrinfo_uptr = std::unique_ptr<addrinfo, decltype(::freeaddrinfo)*>;
+    using AddrinfoPtr_ = std::unique_ptr<addrinfo, decltype(::freeaddrinfo)*>;
 
-    static addrinfo_uptr getaddrinfo(const std::string& host,
+    static AddrinfoPtr_ Getaddrinfo_(const std::string& host,
                                      const std::string& serv,
                                      const addrinfo& hints);
 

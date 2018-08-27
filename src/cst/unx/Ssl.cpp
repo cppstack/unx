@@ -7,7 +7,7 @@ namespace unx {
 int Ssl::connect(int fd)
 {
     if (!ssl_)
-        ssl_.reset(::SSL_new(SslCtx::get()));
+        ssl_.reset(::SSL_new(SslCtx::Get()));
 
     if (!ssl_)
         Throw_ssl_error(static_cast<int>(ssl_errc::ssl), "::SSL_new()");

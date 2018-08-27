@@ -17,7 +17,7 @@ namespace os {
     return orig;
 }
 
-::sighandler_t Signal_(int signum, ::sighandler_t handler, std::error_code* ec)
+::sighandler_t Signal_n(int signum, ::sighandler_t handler, std::error_code* ec)
 {
     struct sigaction act, oact;
 
@@ -42,7 +42,7 @@ namespace os {
     return oact.sa_handler;
 }
 
-::sighandler_t Signal_intr(int signum, ::sighandler_t handler, std::error_code* ec)
+::sighandler_t Signal_i(int signum, ::sighandler_t handler, std::error_code* ec)
 {
     struct sigaction act, oact;
 

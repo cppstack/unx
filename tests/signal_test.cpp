@@ -7,32 +7,32 @@
 
 namespace unx = cst::unx;
 
-const char* msg[] = {
+const char* Msg_[] = {
     "SIGINT is caught.\n",
     "SIGALRM is caught.\n",
     "Other signo is caught.\n"
 };
 
-char buf[1024];
+char Buf_[1024];
 
-void sig_handler(int signo)
+void Sig_handler_(int signo)
 {
     if (signo == SIGINT)
-        ::write(STDERR_FILENO, msg[0], std::strlen(msg[0]));
+        ::write(STDERR_FILENO, Msg_[0], std::strlen(Msg_[0]));
     else if (signo == SIGALRM)
-        ::write(STDERR_FILENO, msg[1], std::strlen(msg[1]));
+        ::write(STDERR_FILENO, Msg_[1], std::strlen(Msg_[1]));
     else
-        ::write(STDERR_FILENO, msg[2], std::strlen(msg[2]));
+        ::write(STDERR_FILENO, Msg_[2], std::strlen(Msg_[2]));
 }
 
-void test_no_signal_handler()
+void Test_no_signal_handler_()
 {
     ::alarm(10);
 
     for (;;) {
-        int n = ::read(STDIN_FILENO, buf, sizeof(buf) - 1);
+        int n = ::read(STDIN_FILENO, Buf_, sizeof(Buf_) - 1);
         if (n >= 0)
-            ::write(STDOUT_FILENO, buf, n);
+            ::write(STDOUT_FILENO, Buf_, n);
         else {
             /* never run, because usually reading stdin doesn't return -1
              * once we get a signal, the default handler will abort the program
@@ -43,17 +43,17 @@ void test_no_signal_handler()
     }
 }
 
-void test_signal()
+void Test_signal_()
 {
-    unx::os::Signal(SIGINT,  sig_handler);
-    unx::os::Signal(SIGALRM, sig_handler);
+    unx::os::Signal(SIGINT,  Sig_handler_);
+    unx::os::Signal(SIGALRM, Sig_handler_);
 
     ::alarm(10);
 
     for (;;) {
-        int n = ::read(STDIN_FILENO, buf, sizeof(buf) - 1);
+        int n = ::read(STDIN_FILENO, Buf_, sizeof(Buf_) - 1);
         if (n >= 0)
-            ::write(STDOUT_FILENO, buf, n);
+            ::write(STDOUT_FILENO, Buf_, n);
         else {
             /* never run even with signals (no matter SIGINT or SIGALRM),
              * because the system's signal() will always
@@ -66,17 +66,17 @@ void test_signal()
     }
 }
 
-void test_signal_()
+void Test_signal_n_()
 {
-    unx::os::Signal_(SIGINT,  sig_handler);
-    unx::os::Signal_(SIGALRM, sig_handler);
+    unx::os::Signal_n(SIGINT,  Sig_handler_);
+    unx::os::Signal_n(SIGALRM, Sig_handler_);
 
     ::alarm(10);
 
     for (;;) {
-        int n = ::read(STDIN_FILENO, buf, sizeof(buf) - 1);
+        int n = ::read(STDIN_FILENO, Buf_, sizeof(Buf_) - 1);
         if (n >= 0)
-            ::write(STDOUT_FILENO, buf, n);
+            ::write(STDOUT_FILENO, Buf_, n);
         else {
             /* run when SIGALRM comes,
              * the customized signal_() will not restart the read() in kernel
@@ -89,17 +89,17 @@ void test_signal_()
     }
 }
 
-void test_signal_intr()
+void Test_signal_i_()
 {
-    unx::os::Signal_intr(SIGINT,  sig_handler);
-    unx::os::Signal_intr(SIGALRM, sig_handler);
+    unx::os::Signal_i(SIGINT,  Sig_handler_);
+    unx::os::Signal_i(SIGALRM, Sig_handler_);
 
     ::alarm(10);
 
     for (;;) {
-        int n = ::read(STDIN_FILENO, buf, sizeof(buf) - 1);
+        int n = ::read(STDIN_FILENO, Buf_, sizeof(Buf_) - 1);
         if (n >= 0)
-            ::write(STDOUT_FILENO, buf, n);
+            ::write(STDOUT_FILENO, Buf_, n);
         else {
             /* run when SIGINT or SIGALRM comes,
              * the customized signal_intr() will not restart the read()
@@ -120,13 +120,13 @@ int main(int argc, const char* argv[])
     int tc = std::atoi(argv[1]);
 
     if (tc == 1)
-        test_no_signal_handler();
+        Test_no_signal_handler_();
     else if (tc == 2)
-        test_signal();
+        Test_signal_();
     else if (tc == 3)
-        test_signal_();
+        Test_signal_n_();
     else if (tc == 4)
-        test_signal_intr();
+        Test_signal_i_();
 
     return 0;
 }

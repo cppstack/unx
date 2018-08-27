@@ -9,8 +9,8 @@ namespace unx {
 namespace os {
 
 ::sighandler_t Signal(int signum, ::sighandler_t handler, std::error_code* ec = nullptr);
-::sighandler_t Signal_(int signum, ::sighandler_t handler, std::error_code* ec = nullptr);
-::sighandler_t Signal_intr(int signum, ::sighandler_t handler, std::error_code* ec = nullptr);
+::sighandler_t Signal_n(int signum, ::sighandler_t handler, std::error_code* ec = nullptr);
+::sighandler_t Signal_i(int signum, ::sighandler_t handler, std::error_code* ec = nullptr);
 
 int Sigaction(int signum, const struct sigaction* act, struct sigaction* oldact, std::error_code* ec = nullptr);
 

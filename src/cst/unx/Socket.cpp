@@ -4,7 +4,7 @@
 namespace cst {
 namespace unx {
 
-Socket Socket::tcp_bind(const InetAddress& addr, int flags)
+Socket Socket::Tcp_bind(const InetAddress& addr, int flags)
 {
     const int on = 1;
     Socket sock(addr.family(), SOCK_STREAM | flags, 0);
@@ -13,7 +13,7 @@ Socket Socket::tcp_bind(const InetAddress& addr, int flags)
     return sock;
 }
 
-Socket Socket::tcp_bind(const std::string& host, const std::string& serv,
+Socket Socket::Tcp_bind(const std::string& host, const std::string& serv,
                         int flags)
 {
     addrinfo hints;
@@ -24,7 +24,7 @@ Socket Socket::tcp_bind(const std::string& host, const std::string& serv,
 
     const int on = 1;
 
-    addrinfo_uptr res = getaddrinfo(host, serv, hints);
+    AddrinfoPtr_ res = Getaddrinfo_(host, serv, hints);
 
     for (const addrinfo* rp = res.get(); rp != nullptr; rp = rp->ai_next) {
         try {
@@ -38,23 +38,23 @@ Socket Socket::tcp_bind(const std::string& host, const std::string& serv,
     Throw_os_error(EINVAL, "tcp_bind()");
 }
 
-Socket Socket::tcp_bind(const std::string& host, uint16_t port, int flags)
+Socket Socket::Tcp_bind(const std::string& host, uint16_t port, int flags)
 {
     try {
-        return tcp_bind(InetAddress(host, port), flags);
+        return Tcp_bind(InetAddress(host, port), flags);
     } catch (const InetAddressError&) { }
 
-    return tcp_bind(host, std::to_string(port), flags);
+    return Tcp_bind(host, std::to_string(port), flags);
 }
 
-Socket Socket::tcp_connect(const InetAddress& addr, int flags)
+Socket Socket::Tcp_connect(const InetAddress& addr, int flags)
 {
     Socket sock(addr.family(), SOCK_STREAM | flags, 0);
     sock.connect(addr.addr(), addr.len());
     return sock;
 }
 
-Socket Socket::tcp_connect(const std::string& host, const std::string& serv,
+Socket Socket::Tcp_connect(const std::string& host, const std::string& serv,
                            int flags)
 {
     addrinfo hints;
@@ -62,7 +62,7 @@ Socket Socket::tcp_connect(const std::string& host, const std::string& serv,
     hints.ai_family   = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 
-    addrinfo_uptr res = getaddrinfo(host, serv, hints);
+    AddrinfoPtr_ res = Getaddrinfo_(host, serv, hints);
 
     for (const addrinfo* rp = res.get(); rp != nullptr; rp = rp->ai_next) {
         int fd = ::socket(rp->ai_family, rp->ai_socktype | flags,
@@ -81,13 +81,13 @@ Socket Socket::tcp_connect(const std::string& host, const std::string& serv,
     Throw_os_error(ECONNREFUSED, "tcp_connect()");
 }
 
-Socket Socket::tcp_connect(const std::string& host, uint16_t port, int flags)
+Socket Socket::Tcp_connect(const std::string& host, uint16_t port, int flags)
 {
     try {
-        return tcp_connect(InetAddress(host, port), flags);
+        return Tcp_connect(InetAddress(host, port), flags);
     } catch (const InetAddressError&) { }
 
-    return tcp_connect(host, std::to_string(port), flags);
+    return Tcp_connect(host, std::to_string(port), flags);
 }
 
 int Socket::connect(const std::string& host, uint16_t port)
@@ -103,7 +103,7 @@ int Socket::connect(const std::string& host, uint16_t port)
     hints.ai_socktype = type_;
     hints.ai_protocol = proto_;
 
-    addrinfo_uptr res = getaddrinfo(host, std::to_string(port), hints);
+    AddrinfoPtr_ res = Getaddrinfo_(host, std::to_string(port), hints);
 
     for (const addrinfo* rp = res.get(); rp != nullptr; rp = rp->ai_next) {
         int rc = ::connect(fd_, rp->ai_addr, rp->ai_addrlen);
@@ -142,7 +142,7 @@ ssize_t Socket::read_until(void* buf, size_t len, char delim)
     return read(buf, n);
 }
 
-Socket::addrinfo_uptr Socket::getaddrinfo(const std::string& host,
+Socket::AddrinfoPtr_ Socket::Getaddrinfo_(const std::string& host,
                                           const std::string& serv,
                                           const addrinfo& hints)
 {
@@ -154,7 +154,7 @@ Socket::addrinfo_uptr Socket::getaddrinfo(const std::string& host,
 
     os::Getaddrinfo(node, serv.c_str(), &hints, &res);
 
-    return addrinfo_uptr(res, ::freeaddrinfo);
+    return AddrinfoPtr_(res, ::freeaddrinfo);
 }
 
 }

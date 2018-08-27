@@ -20,7 +20,7 @@ SslCtx::SslCtx()
     SSL_CTX_set_mode(ctx_.get(), SSL_MODE_AUTO_RETRY);
 }
 
-void SslCtx::cleanup() noexcept
+void SslCtx::Cleanup_() noexcept
 {
     ::ERR_free_strings();
     ::ERR_remove_thread_state(NULL);
